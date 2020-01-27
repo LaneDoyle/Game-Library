@@ -7,6 +7,10 @@ import sys
 
 '''Program to create a game library'''
 
+#Dictionary
+games = {1: ['FPS', 'Halo 3', 'Bungee', 'Microsoft', 'Xbox 360', '2007',
+             '10', 'either', '30.00', 'Yes', '1/15/2008', 'This game blows chunks!']
+
 #Functions
 def add_and_edit():
     print("Running add_and_edit()")
@@ -27,6 +31,7 @@ def quit():
     print("Running quit()")
     sys.exit()
     
+
 #Main Menu    
 while True:
     print('''

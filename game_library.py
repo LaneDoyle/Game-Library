@@ -42,7 +42,9 @@ while True:
     5) Save Library
     Q) Quit 
     ''')
+    
     choice = input("What would you like to do? ")
+    
     if choice == "1":
         add_and_edit()
     elif choice == "2":

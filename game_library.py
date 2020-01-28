@@ -22,8 +22,8 @@ def add_and_edit():
 def print_all():
     #print("Running print_all()")
     games_key_list = games.keys()
+    
     for key in games_key_list:
-        print("-----------")
         print("Genre: ", games[key][0])
         print("Title: ", games[key][1])
         print("Developer: ", games[key][2])
@@ -52,9 +52,9 @@ def save_library():
     print("File saved!")
     
 def quit():
-    print("Running quit()")
-    sys.exit()
-    
+    #print("Running quit()")
+    print("Goodbye!")
+    sys.exit()   
 
 #Main Menu    
 while True:

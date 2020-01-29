@@ -83,7 +83,7 @@ def search():
         elif search_option == '11':
             search_by_purchasedate()
         else:
-            print("That is not a valid option!")
+            print("That is not a valid option!")               
         
         search_input = input("Would you like to continue searching? Y/N ")
         
@@ -93,6 +93,7 @@ def search():
             
 def search_by_title():
     found_one = False
+    search_results = {}
     title = input("What is the title of the game? ")
     for key in games.keys():
         if title in games[key][1]:
@@ -110,7 +111,7 @@ def search_by_title():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
     if not found_one:
         print("NO MATCHES FOUND!") 
         
@@ -134,6 +135,7 @@ def search_by_genre():
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
             print("-----------") 
+                        
     if not found_one:
         print("NO MATCHES FOUND!") 
         
@@ -157,6 +159,7 @@ def search_by_developer():
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
             print("-----------") 
+                       
     if not found_one:
         print("NO MATCHES FOUND!") 
         
@@ -180,6 +183,7 @@ def search_by_publisher():
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
             print("-----------") 
+                        
     if not found_one:
         print("NO MATCHES FOUND!")
 
@@ -202,7 +206,8 @@ def search_by_system():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                       
     if not found_one:
         print("NO MATCHES FOUND!")
         
@@ -225,7 +230,8 @@ def search_by_release():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                        
     if not found_one:
         print("NO MATCHES FOUND!")
         
@@ -248,7 +254,8 @@ def search_by_rating():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                       
     if not found_one:
         print("NO MATCHES FOUND!")
 
@@ -272,7 +279,8 @@ def search_by_sme():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                      
     if not found_one:
         print("NO MATCHES FOUND!")
         
@@ -296,6 +304,7 @@ def search_by_price():
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
             print("-----------") 
+                       
     if not found_one:
         print("NO MATCHES FOUND!")
         
@@ -318,7 +327,8 @@ def search_by_beat():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                      
     if not found_one:
         print("NO MATCHES FOUND!")
         
@@ -341,10 +351,10 @@ def search_by_purchasedate():
             print("Beat it?: ", games[key][9])
             print("Purchase Date: ", games[key][10])
             print("Notes: ", games[key][11])
-            print("-----------") 
+            print("-----------")
+                       
     if not found_one:
-        print("NO MATCHES FOUND!")
-            
+        print("NO MATCHES FOUND!")    
     
 def remove_title():
     print("Running remove_title()")

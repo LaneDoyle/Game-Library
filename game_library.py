@@ -22,6 +22,7 @@ def print_all():
     games_key_list = games.keys()
     
     for key in games_key_list:
+        print()
         print("Genre: ", games[key][0])
         print("Title: ", games[key][1])
         print("Developer: ", games[key][2])
@@ -37,7 +38,31 @@ def print_all():
         print("-----------")    
     
 def search_by_title():
-    print("Running search_by_title()")
+    #print("Running search_by_title()")
+    found_one = False
+    games_key_list = games.keys()
+    title = input("What is the title of the game? ")
+    
+    for key in games_key_list:
+        if title == games[key][1]:
+            found_one = True
+            print()
+            print("Genre: ", games[key][0])
+            print("Title: ", games[key][1])
+            print("Developer: ", games[key][2])
+            print("Publisher: ", games[key][3])
+            print("System: ", games[key][4])
+            print("Release Date: ", games[key][5])
+            print("Rating: ", games[key][6])
+            print("Single player/multi/either: ", games[key][7])
+            print("Price: ", games[key][8])
+            print("Beat it?: ", games[key][9])
+            print("Purchase Date: ", games[key][10])
+            print("Notes: ", games[key][11])
+            print("-----------")
+            
+    if not found_one:
+        print("NO MATCHES FOUND!")    
     
 def remove_title():
     print("Running remove_title()")

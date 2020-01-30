@@ -15,7 +15,24 @@ data_file.close()
 
 #Functions
 def add_and_edit():
-    print("Running add_and_edit()")
+    #print("Running add_and_edit()")
+    while True:
+        print('''
+        ---------------------
+        Changing Your Library
+        ---------------------
+        
+        Editing Options:
+        1) Add a game
+        2) Edit an already existing game
+        ''')
+        editing_option = input("What would you like to do? ")
+        
+        if search_option == '1':
+            
+        elif search_option == '2':
+            print("Editing...")    
+    
 
 def print_all():
     #print("Running print_all()")

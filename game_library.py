@@ -16,7 +16,9 @@ data_file.close()
 #Functions
 def add_and_edit():
     #print("Running add_and_edit()")
-    while True:
+    continue_edit = True
+    
+    while continue_edit:
         print('''
         ---------------------
         Changing Your Library
@@ -28,10 +30,46 @@ def add_and_edit():
         ''')
         editing_option = input("What would you like to do? ")
         
-        if search_option == '1':
+        if editing_option == '1':
+            new_key = len(games) + 1
+            valid = False
+            while not valid:
+                new_genre = input("What is the genre? ")
+                new_title = input("What is the title? ")
+                new_developer = input("Who is the developer? ")
+                new_publisher = input("Who is the publisher? ")
+                new_system = input("What is the system it is played on? ")
+                new_release = input("What is the release date? ")
+                new_rating = input("What is the rating? ")
+                new_sme = input("Is it single player, mulit, or either? ")
+                new_price = input("What is the price? ")
+                new_beat = input("Have you beaten it? ")
+                new_purchase = input("What is the purchase date? ")
+                new_notes = input("Any notes? ")
+                new_entry = [new_genre, new_title, new_developer, new_publisher, new_system,
+                             new_release, new_rating, new_sme, new_price, new_beat, new_purchase,
+                             new_notes]
+                print("------------------------")
+                print("Genre: ", new_genre)
+                print("Title: ", new_title)
+                print("Developer: ", new_developer)
+                print("Publisher: ", new_publisher)
+                print("System: ", new_system)
+                print("Release Date: ", new_release)
+                print("Rating: ", new_rating)
+                print("Single/multi/either: ", new_sme)
+                print("Price: ", new_price)
+                print("Beat it?: ", new_beat)
+                print("Purchase Date: ", new_purchase)
+                print("Notes: ", new_notes)
+                answer = input("Is all of this information correct? Y/N ")
+                if answer.lower() == "y":
+                    valid = True
+                    games[new_key] = new_entry
+                    continue_edit = False
             
-        elif search_option == '2':
-            print("Editing...")    
+        elif editing_option == '2':
+            print("Editing...")  
     
 
 def print_all():

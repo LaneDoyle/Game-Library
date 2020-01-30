@@ -16,9 +16,8 @@ data_file.close()
 #Functions
 def add_and_edit():
     #print("Running add_and_edit()")
-    continue_edit = True
     
-    while continue_edit:
+    while True:
         print('''
         ---------------------
         Changing Your Library
@@ -31,47 +30,117 @@ def add_and_edit():
         editing_option = input("What would you like to do? ")
         
         if editing_option == '1':
-            new_key = len(games) + 1
-            valid = False
-            while not valid:
-                new_genre = input("What is the genre? ")
-                new_title = input("What is the title? ")
-                new_developer = input("Who is the developer? ")
-                new_publisher = input("Who is the publisher? ")
-                new_system = input("What is the system it is played on? ")
-                new_release = input("What is the release date? ")
-                new_rating = input("What is the rating? ")
-                new_sme = input("Is it single player, mulit, or either? ")
-                new_price = input("What is the price? ")
-                new_beat = input("Have you beaten it? ")
-                new_purchase = input("What is the purchase date? ")
-                new_notes = input("Any notes? ")
-                new_entry = [new_genre, new_title, new_developer, new_publisher, new_system,
-                             new_release, new_rating, new_sme, new_price, new_beat, new_purchase,
-                             new_notes]
-                print("------------------------")
-                print("Genre: ", new_genre)
-                print("Title: ", new_title)
-                print("Developer: ", new_developer)
-                print("Publisher: ", new_publisher)
-                print("System: ", new_system)
-                print("Release Date: ", new_release)
-                print("Rating: ", new_rating)
-                print("Single/multi/either: ", new_sme)
-                print("Price: ", new_price)
-                print("Beat it?: ", new_beat)
-                print("Purchase Date: ", new_purchase)
-                print("Notes: ", new_notes)
-                answer = input("Is all of this information correct? Y/N ")
-                if answer.lower() == "y":
-                    valid = True
-                    games[new_key] = new_entry
-                    continue_edit = False
+            add()
+            continue_edit = False
             
         elif editing_option == '2':
-            print("Editing...")  
-    
-
+            edit()
+            continue_edit = False
+        confirmation = input("Would you like to continue editing? ")
+        if confirmation.lower() == "n":
+            break
+def add():
+    new_key = len(games) + 1
+    valid = False
+    while not valid:
+        new_genre = input("What is the genre? ")
+        new_title = input("What is the title? ")
+        new_developer = input("Who is the developer? ")
+        new_publisher = input("Who is the publisher? ")
+        new_system = input("What is the system it is played on? ")
+        new_release = input("What is the release date? ")
+        new_rating = input("What is the rating? ")
+        new_sme = input("Is it single player, mulit, or either? ")
+        new_price = input("What is the price? ")
+        new_beat = input("Have you beaten it? ")
+        new_purchase = input("What is the purchase date? ")
+        new_notes = input("Any notes? ")
+        new_entry = [new_genre, new_title, new_developer, new_publisher, new_system,
+                     new_release, new_rating, new_sme, new_price, new_beat, new_purchase,
+                     new_notes]
+        print("------------------------")
+        print("Genre: ", new_genre)
+        print("Title: ", new_title)
+        print("Developer: ", new_developer)
+        print("Publisher: ", new_publisher)
+        print("System: ", new_system)
+        print("Release Date: ", new_release)
+        print("Rating: ", new_rating)
+        print("Single/multi/either: ", new_sme)
+        print("Price: ", new_price)
+        print("Beat it?: ", new_beat)
+        print("Purchase Date: ", new_purchase)
+        print("Notes: ", new_notes)
+        answer = input("Is all of this information correct? Y/N ")
+        if answer.lower() == "y":
+            valid = True
+            games[new_key] = new_entry  
+def edit():
+    valid = False
+    while not valid:
+        print("Your current library: ")
+        for key in games.keys():
+            print(key, "-", games[key][1])
+        edit_key = input("Which game would you like to edit? ")
+        edit_key = int(edit_key)
+        edit_entry = games[edit_key]
+        if edit_key in games:
+            print("Current genre: ", edit_entry[0])
+            edit_entry[0] = input("New Genre: ")
+            print("")
+            print("Current title: ", edit_entry[1])
+            edit_entry[1] = input("New title: ")
+            print("")
+            print("Current developer: ", edit_entry[2])
+            edit_entry[2] = input("New developer: ")
+            print("")
+            print("Current publisher: ", edit_entry[3])
+            edit_entry[3] = input("New publisher: ")
+            print("")
+            print("Current system: ", edit_entry[4])
+            edit_entry[4] = input("New system: ")
+            print("")
+            print("Current release date: ", edit_entry[5])
+            edit_entry[5] = input("New release date: ")
+            print("Current rating: ", edit_entry[6])
+            print("")
+            edit_entry[6] = input("New rating: ") 
+            print("Current single player/multi/either: ", edit_entry[7])
+            edit_entry[7] = input("New single player/multi/either: ")
+            print("")
+            print("Current price: ", edit_entry[8])
+            edit_entry[8] = input("New price: ")
+            print("")
+            print("Current status(beaten): ", edit_entry[9])
+            edit_entry[9] = input("New status: ")
+            print("")
+            print("Current purchase date: ", edit_entry[10])
+            edit_entry[10] = input("New purchase date: ")
+            print("")
+            print("Current notes: ", edit_entry[11])
+            edit_entry[11] = input("New notes: ")
+            
+            print("------------------------")
+            print("Genre: ", edit_entry[0])
+            print("Title: ", edit_entry[1])
+            print("Developer: ", edit_entry[2])
+            print("Publisher: ", edit_entry[3])
+            print("System: ", edit_entry[4])
+            print("Release Date: ", edit_entry[5])
+            print("Rating: ", edit_entry[6])
+            print("Single/multi/either: ", edit_entry[7])
+            print("Price: ", edit_entry[8])
+            print("Beat it?: ", edit_entry[9])
+            print("Purchase Date: ", edit_entry[10])
+            print("Notes: ", edit_entry[11])
+            
+            answer = input("Is all of this information correct? Y/N ")
+            if answer.lower() == "y":
+                valid = True
+                edit_entry = games[edit_key]
+        else:
+            print("NO MATCHES FOUND!") 
+            
 def print_all():
     #print("Running print_all()")
     games_key_list = games.keys()
@@ -423,8 +492,12 @@ def save_library():
     
 def quit():
     #print("Running quit()")
-    print("Goodbye!")
-    sys.exit()   
+    confirm = input("Are you sure you want to quit? Y/N ")
+    if confirm.lower() == "y":
+        print("Goodbye!")
+        sys.exit()
+    elif confirm.lower() == "n":
+        pass
 
 #Main Menu    
 while True:

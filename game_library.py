@@ -36,7 +36,7 @@ def add_and_edit():
         elif editing_option == '2':
             edit()
             continue_edit = False
-        confirmation = input("Would you like to continue editing? ")
+        confirmation = input("Would you like to continue editing? Y/N ")
         if confirmation.lower() == "n":
             break
 def add():
@@ -81,7 +81,7 @@ def edit():
         print("Your current library: ")
         for key in games.keys():
             print(key, "-", games[key][1])
-        edit_key = input("Which game would you like to edit? ")
+        edit_key = input("What is the number of the game would you like to edit? ")
         edit_key = int(edit_key)
         edit_entry = games[edit_key]
         if edit_key in games:
@@ -481,7 +481,35 @@ def search_by_purchasedate():
         print("NO MATCHES FOUND!")    
     
 def remove_title():
-    print("Running remove_title()")
+    #print("Running remove_title()")
+    valid = False
+    while not valid:
+        print("Your current library: ")
+        for key in games.keys():
+            print(key, "-", games[key][1]) 
+        chosen_title = input("What is the number of the game would you like to remove? ")
+        chosen_title = int(chosen_title)
+        if chosen_title in games:
+            confirm = input("Are you sure you want to remove this game? Y/N ")
+            if confirm.lower() == "y":
+                removed_game = games.pop(chosen_title)
+                print(removed_game[1], " removed!")
+                valid = True
+            else:
+                try_again = input("Would you still like to remove a game? Y/N ")
+                if try_again.lower() == "y":
+                    pass
+                else:
+                    valid = True
+        else:
+            print("NO MATCHES FOUND!")
+            try_again = input("Would you still like to remove a game? Y/N ")
+            if try_again.lower() == "y":
+                pass
+            else:
+                valid = True
+            
+    
     
 def save_library():
     #print("Running save_library()")
@@ -492,12 +520,17 @@ def save_library():
     
 def quit():
     #print("Running quit()")
-    confirm = input("Are you sure you want to quit? Y/N ")
-    if confirm.lower() == "y":
+    confirm_save = input("Would you like to save? Y/N ")
+    if confirm_save.lower() == "y":
+        data_file = open("game_lib.pickle", "wb")
+        pickle.dump(games, data_file)
+        data_file.close()
+        print("File saved!")
         print("Goodbye!")
         sys.exit()
-    elif confirm.lower() == "n":
-        pass
+    else:
+        print("Goodbye!")
+        sys.exit()
 
 #Main Menu    
 while True:

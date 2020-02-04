@@ -490,16 +490,12 @@ def remove_title():
         chosen_title = input("What is the number of the game would you like to remove? ")
         chosen_title = int(chosen_title)
         if chosen_title in games:
-            confirm = input("Are you sure you want to remove this game? Y/N ")
-            if confirm.lower() == "y":
-                removed_game = games.pop(chosen_title)
-                print(removed_game[1], " removed!")
-                valid = True
-            else:
-                try_again = input("Would you still like to remove a game? Y/N ")
-                if try_again.lower() == "y":
-                    pass
-                else:
+            for key in range(1, len(games)+1):
+                if key >= chosen_title and key != len(games):
+                    games[key] = games[key +1]
+                if key == len(games):
+                    removed_game = games.pop(chosen_title)
+                    print(removed_game[1], " removed!")
                     valid = True
         else:
             print("NO MATCHES FOUND!")

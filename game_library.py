@@ -39,6 +39,7 @@ def add_and_edit():
         confirmation = input("Would you like to continue editing? Y/N ")
         if confirmation.lower() == "n":
             break
+
 def add():
     new_key = len(games) + 1
     valid = False
@@ -75,6 +76,7 @@ def add():
         if answer.lower() == "y":
             valid = True
             games[new_key] = new_entry  
+
 def edit():
     valid = False
     while not valid:
@@ -213,8 +215,7 @@ def search():
         
         if search_input == 'N' or search_input == 'n':
             break
-
-            
+           
 def search_by_title():
     found_one = False
     search_results = {}
@@ -503,9 +504,7 @@ def remove_title():
             if try_again.lower() == "y":
                 pass
             else:
-                valid = True
-            
-    
+                valid = True  
     
 def save_library():
     #print("Running save_library()")

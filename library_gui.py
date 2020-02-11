@@ -4,7 +4,7 @@
 
 import pickle as pk
 import tkinter as tk
-from tkinter import scrolledtext
+from tkinter.scrolledtext import ScrolledText
 
 '''The Game Library Program'''
 
@@ -41,7 +41,7 @@ class SearchMenu(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
         lbl_title = tk.Label(text = "Search", font = TITLE_FONT)
-        lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
+        lbl_title.grid(row = 0, column = 0, sticky = "news")
         
         lbl_searchby = tk.Label(text = "Search By:", font = TITLE_FONT)
         lbl_searchby.grid(row = 1, column = 0, sticky = "news")     
@@ -54,57 +54,62 @@ class SearchMenu(tk.Frame):
         
         ent_searchfor = tk.Entry(font = WIDGET_FONT)
         ent_searchfor.grid(row = 4, column = 0, sticky = "news")
+
+        self.print_filters = PrintFilters(self)
+        self.print_filters.grid(row = 3, column = 1, sticky = "news")
         
-        lbl_filters = tk.Label(text = "Print Filters:", font = TITLE_FONT)
-        lbl_filters.grid(row = 1, column = 1, sticky = "news")
-        
-        chk_genre = tk.Checkbutton(text='Genre', onvalue = 1, offvalue = 0)
-        chk_genre.grid(row = 2, column = 1, sticky = "news")
-        
-        chk_title = tk.Checkbutton(text='Title', onvalue = 1, offvalue = 0)
-        chk_title.grid(row = 2, column = 2, sticky = "news")
-        
-        chk_developer = tk.Checkbutton(text='Developer', onvalue = 1, offvalue = 0)
-        chk_developer.grid(row = 3, column = 1, sticky = "news")
-        
-        chk_publisher = tk.Checkbutton(text='Publisher', onvalue = 1, offvalue = 0)
-        chk_publisher.grid(row = 3, column = 2, sticky = "news")
-        
-        chk_system = tk.Checkbutton(text='System', onvalue = 1, offvalue = 0)
-        chk_system.grid(row = 4, column = 1, sticky = "news")
-        
-        chk_purchasedate= tk.Checkbutton(text='Purchase Date', onvalue = 1, offvalue = 0)
-        chk_purchasedate.grid(row = 4, column = 2, sticky = "news")
-        
-        chk_sme = tk.Checkbutton(text='Single/Multi/Either', onvalue = 1, offvalue = 0)
-        chk_sme.grid(row = 5, column = 1, sticky = "news")
-        
-        chk_price = tk.Checkbutton(text='Genre', onvalue = 1, offvalue = 0)
-        chk_price.grid(row = 5, column = 2, sticky = "news")
-        
-        chk_releasedate = tk.Checkbutton(text='Release Date', onvalue = 1, offvalue = 0)
-        chk_releasedate.grid(row = 6, column = 1, sticky = "news")
-        
-        chk_status = tk.Checkbutton(text='Status', onvalue = 1, offvalue = 0)
-        chk_status.grid(row = 6, column = 2, sticky = "news")
-        
-        chk_rating = tk.Checkbutton(text='Rating', onvalue = 1, offvalue = 0)
-        chk_rating.grid(row = 7, column = 1, sticky = "news")
-        
-        #scr_results = scrolledtext(font = WIDGET_FONT, wrap = 'word')
-        #scr_results.grid(row = 8, column = 0, columnspan = 2, sticky = "news")
+        scr_results = ScrolledText(font = WIDGET_FONT, wrap = 'word')
+        scr_results.grid(row = 5, column = 0, columnspan = 2, sticky = "news")
         
         btn_back = tk.Button(text = "Back", font = WIDGET_FONT)
-        btn_back.grid(row = 9, column = 0)
+        btn_back.grid(row = 6, column = 0)
     
         btn_submit = tk.Button(text = "Submit", font = WIDGET_FONT)
-        btn_submit.grid(row = 9, column = 1)
+        btn_submit.grid(row = 6, column = 1)
         
         btn_clear = tk.Button(text = "Clear", font = WIDGET_FONT)
-        btn_clear.grid(row = 9, column = 2)        
+        btn_clear.grid(row = 6, column = 2)        
         
         
+class PrintFilters(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, master = parent)
         
+        lbl_filters = tk.Label(text = "Print Filters:", font = TITLE_FONT)
+        lbl_filters.grid(row = 0, column = 1, columnspan = 2,  sticky = "news")
+        
+        chk_genre = tk.Checkbutton(text='Genre', onvalue = 1, offvalue = 0)
+        chk_genre.grid(row = 1, column = 1)
+        
+        chk_title = tk.Checkbutton(text='Title', onvalue = 1, offvalue = 0)
+        chk_title.grid(row = 2, column = 1)
+        
+        chk_developer = tk.Checkbutton(text='Developer', onvalue = 1, offvalue = 0)
+        chk_developer.grid(row = 3, column = 1)
+        
+        chk_publisher = tk.Checkbutton(text='Publisher', onvalue = 1, offvalue = 0)
+        chk_publisher.grid(row = 4, column = 1)
+        
+        chk_system = tk.Checkbutton(text='System', onvalue = 1, offvalue = 0)
+        chk_system.grid(row = 1, column = 2)
+        
+        chk_purchasedate= tk.Checkbutton(text='Purchase Date', onvalue = 1, offvalue = 0)
+        chk_purchasedate.grid(row = 2, column = 2)
+        
+        chk_sme = tk.Checkbutton(text='Single/Multi/Either', onvalue = 1, offvalue = 0)
+        chk_sme.grid(row = 3, column = 2)
+        
+        chk_price = tk.Checkbutton(text='Genre', onvalue = 1, offvalue = 0)
+        chk_price.grid(row = 4, column = 2)
+        
+        chk_releasedate = tk.Checkbutton(text='Release Date', onvalue = 1, offvalue = 0)
+        chk_releasedate.grid(row = 1, column = 3)
+        
+        chk_status = tk.Checkbutton(text='Status', onvalue = 1, offvalue = 0)
+        chk_status.grid(row = 2, column = 3)
+        
+        chk_rating = tk.Checkbutton(text='Rating', onvalue = 1, offvalue = 0)
+        chk_rating.grid(row = 3, column = 3)        
         
         
 if __name__ == "__main__":
@@ -114,7 +119,7 @@ if __name__ == "__main__":
     datafile.close()
     root = tk.Tk()
     #root.title("The Game Library")
-    root.geometry("500x500")
+    #root.geometry("500x500")
     #main_menu = MainMenu()
     #main_menu.grid(row = 0, column = 0, stick = "news")
     

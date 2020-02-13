@@ -40,11 +40,11 @@ class MainMenu(tk.Frame):
 class SearchMenu(tk.Frame):        
     def __init__(self):
         tk.Frame.__init__(self)
-        options = ["Genre", "Title", "Developer", "Publisher", "System", 
+        search_options = ["Genre", "Title", "Developer", "Publisher", "System", 
                    "Release Date", "Rating", "Mode", "Price", "Status",
                    "Purchase Date"]
-        tkvar = tk.StringVar(self)
-        tkvar.set(options[0])
+        search_tkvar = tk.StringVar(self)
+        search_tkvar.set(search_options[0])
         
         self.lbl_title = tk.Label(self, text = "Search", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky = "news")
@@ -52,7 +52,7 @@ class SearchMenu(tk.Frame):
         self.lbl_searchby = tk.Label(self, text = "Search By:", font = TITLE_FONT)
         self.lbl_searchby.grid(row = 1, column = 0, sticky = "news")     
         
-        self.dbx_searchby = tk.OptionMenu(self, tkvar, *options)
+        self.dbx_searchby = tk.OptionMenu(self, search_tkvar, *search_options)
         self.dbx_searchby.grid(row = 2, column = 0, sticky = "news")
         
         self.lbl_searchfor = tk.Label(self, text = "Search For:", font = TITLE_FONT)
@@ -122,13 +122,33 @@ class SearchButtons(tk.Frame):
         
         self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT)
         self.btn_clear.grid(row = 0, column = 2)
+        
+class AddButtons(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, master = parent)
+        
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back.grid(row = 0, column = 0)
+    
+        self.btn_submit = tk.Button(self, text = "Reset", font = WIDGET_FONT)
+        self.btn_submit.grid(row = 0, column = 1)
+        
+        self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT)
+        self.btn_clear.grid(row = 0, column = 2)
 
 class AddMenu(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
+        mode_options = ["Single", "Multi_Player", "Either"]
+        mode_tkvar = tk.StringVar(self)
+        mode_tkvar.set(mode_options[0])
+        
+        status_options = ["Yes", "No"]
+        status_tkvar = tk.StringVar(self)
+        status_tkvar.set(status_options[0])        
         
         self.lbl_title = tk.Label(self, text = "Add", font = TITLE_FONT)
-        self.lbl_title.grid(row = 0, column = 0, columnspan = 3, sticky = "news")
+        self.lbl_title.grid(row = 0, column = 0, columnspan = 4, sticky = "news")
         
         self.lbl_genre = tk.Label(self, text = "Genre:", font = TITLE_FONT)
         self.lbl_genre.grid(row = 1, column = 0, sticky = "news")        
@@ -140,7 +160,99 @@ class AddMenu(tk.Frame):
         self.lbl_title.grid(row = 1, column = 2, sticky = "news")        
         
         self.ent_title = tk.Entry(self, font = WIDGET_FONT)
-        self.ent_title.grid(row = 1, column = 3, sticky = "news")        
+        self.ent_title.grid(row = 1, column = 3, sticky = "news")
+        
+        self.lbl_dev = tk.Label(self, text = "Developer:", font = TITLE_FONT)
+        self.lbl_dev.grid(row = 2, column = 0, sticky = "news")        
+        
+        self.ent_dev = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_dev.grid(row = 2, column = 1, sticky = "news")
+        
+        self.lbl_pub = tk.Label(self, text = "Publisher:", font = TITLE_FONT)
+        self.lbl_pub.grid(row = 2, column = 2, sticky = "news")        
+        
+        self.ent_pub = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_pub.grid(row = 2, column = 3, sticky = "news")
+        
+        self.lbl_system = tk.Label(self, text = "System:", font = TITLE_FONT)
+        self.lbl_system.grid(row = 3, column = 0, sticky = "news")        
+        
+        self.ent_system = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_system.grid(row = 3, column = 1, sticky = "news")
+        
+        self.lbl_release = tk.Label(self, text = "Release Date:", font = TITLE_FONT)
+        self.lbl_release.grid(row = 3, column = 2, sticky = "news")        
+        
+        self.ent_release = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_release.grid(row = 3, column = 3, sticky = "news") 
+        
+        self.lbl_rating = tk.Label(self, text = "Rating:", font = TITLE_FONT)
+        self.lbl_rating.grid(row = 4, column = 0, sticky = "news")        
+        
+        self.ent_rating = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_rating.grid(row = 4, column = 1, sticky = "news")
+        
+        self.lbl_mode = tk.Label(self, text = "Mode:", font = TITLE_FONT)
+        self.lbl_mode.grid(row = 4, column = 2, sticky = "news")        
+        
+        self.dbx_mode = tk.OptionMenu(self, mode_tkvar, *mode_options)
+        self.dbx_mode.grid(row = 4, column = 3, sticky = "news")
+        
+        self.lbl_price = tk.Label(self, text = "Price:", font = TITLE_FONT)
+        self.lbl_price.grid(row = 5, column = 0, sticky = "news")        
+        
+        self.ent_price = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_price.grid(row = 5, column = 1, sticky = "news")        
+        
+        self.lbl_status = tk.Label(self, text = "Status:", font = TITLE_FONT)
+        self.lbl_status.grid(row = 5, column = 2, sticky = "news")        
+        
+        self.dbx_status = tk.OptionMenu(self, status_tkvar, *status_options)
+        self.dbx_status.grid(row = 5, column = 3, sticky = "news")
+        
+        self.lbl_purchase = tk.Label(self, text = "Purchase Date:", font = TITLE_FONT)
+        self.lbl_purchase.grid(row = 6, column = 0, sticky = "news")
+        
+        self.ent_purchase = tk.Entry(self, font = WIDGET_FONT)
+        self.ent_purchase.grid(row = 6, column = 1, sticky = "news")
+        
+        self.lbl_notes = tk.Label(self, text = "Notes:", font = TITLE_FONT)
+        self.lbl_notes.grid(row = 7, column = 0, sticky = "news")        
+        
+        self.scr_notes = ScrolledText(self, height = 8, width = 40, font = WIDGET_FONT, wrap = 'word')
+        self.scr_notes.grid(row = 7, column = 1, columnspan = 2, sticky = "news")
+        
+        self.frm_addbuttons = AddButtons(self)
+        self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")        
+        
+class EditMenu(tk.Frame):
+    def __init__(self):
+        tk.Frame.__init__(self)
+        edit_options = ["Title 1", "Title 2"]
+        edit_tkvar = tk.StringVar(self)
+        edit_tkvar.set(edit_options[0])       
+        
+        self.lbl_title = tk.Label(self, text = "Which title would you like to remove?", font = TITLE_FONT)
+        self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
+        
+        self.dbx_games = tk.OptionMenu(self, edit_tkvar, *edit_options)
+        self.dbx_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news")
+        
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back.grid(row = 2, column = 0)
+    
+        self.btn_submit = tk.Button(self, text = "Remove", font = WIDGET_FONT)
+        self.btn_submit.grid(row = 2, column = 1)        
+        
+        
+        
+                
+        
+        
+        
+                
+        
+        
         
         
 if __name__ == "__main__":
@@ -158,8 +270,11 @@ if __name__ == "__main__":
     #search_menu = SearchMenu()
     #search_menu.grid(row = 0, column = 0, stick = "news")
     
-    add_menu = AddMenu()
-    add_menu.grid(row = 0, column = 0, stick = "news")
+    #add_menu = AddMenu()
+    #add_menu.grid(row = 0, column = 0, stick = "news")
+    
+    edit_menu = EditMenu()
+    edit_menu.grid(row = 0, column = 0, stick = "news")    
     
     #main_menu.tkraise()
     root.mainloop()

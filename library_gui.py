@@ -299,8 +299,8 @@ if __name__ == "__main__":
     #remove_selection_menu = RemoveSelectionMenu()
     #remove_selection_menu.grid(row = 0, column = 0, stick = "news")
     
-    remove_menu = RemoveMenu()
-    remove_menu.grid(row = 0, column = 0, stick = "news")
+    #remove_menu = RemoveMenu()
+    #remove_menu.grid(row = 0, column = 0, stick = "news")
     
     
     #main_menu.tkraise()

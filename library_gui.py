@@ -23,8 +23,7 @@ class MainMenu(tk.Frame):
         self.btn_edit = tk.Button(self, text = "Edit", font = WIDGET_FONT)
         self.btn_edit.grid(row = 2, column = 0)
         
-        self.btn_search = tk.Button(self, text = "Search", font = WIDGET_FONT, 
-                               command = self.raise_search)
+        self.btn_search = tk.Button(self, text = "Search", font = WIDGET_FONT)
         self.btn_search.grid(row = 3, column = 0)
     
         self.btn_remove = tk.Button(self, text = "Remove", font = WIDGET_FONT)
@@ -33,18 +32,14 @@ class MainMenu(tk.Frame):
         self.btn_save = tk.Button(self, text = "Save", font = WIDGET_FONT)
         self.btn_save.grid(row = 5, column = 0)
         
-    def raise_search(self):
-        search_menu.tkraise()
-        
-
 class SearchMenu(tk.Frame):        
     def __init__(self):
         tk.Frame.__init__(self)
-        search_options = ["Genre", "Title", "Developer", "Publisher", "System", 
+        self.search_options = ["Genre", "Title", "Developer", "Publisher", "System", 
                    "Release Date", "Rating", "Mode", "Price", "Status",
                    "Purchase Date"]
-        search_tkvar = tk.StringVar(self)
-        search_tkvar.set(search_options[0])
+        self.search_tkvar = tk.StringVar(self)
+        self.search_tkvar.set(self.search_options[0])
         
         self.lbl_title = tk.Label(self, text = "Search", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky = "news")
@@ -52,7 +47,7 @@ class SearchMenu(tk.Frame):
         self.lbl_searchby = tk.Label(self, text = "Search By:", font = TITLE_FONT)
         self.lbl_searchby.grid(row = 1, column = 0, sticky = "news")     
         
-        self.dbx_searchby = tk.OptionMenu(self, search_tkvar, *search_options)
+        self.dbx_searchby = tk.OptionMenu(self, self.search_tkvar, *self.search_options)
         self.dbx_searchby.grid(row = 2, column = 0, sticky = "news")
         
         self.lbl_searchfor = tk.Label(self, text = "Search For:", font = TITLE_FONT)
@@ -136,18 +131,18 @@ class AddButtons(tk.Frame):
         self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT)
         self.btn_clear.grid(row = 0, column = 2)
 
-class AddMenu(tk.Frame):
+class AddEditMenu(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
-        mode_options = ["Single", "Multi_Player", "Either"]
-        mode_tkvar = tk.StringVar(self)
-        mode_tkvar.set(mode_options[0])
+        self.mode_options = ["Single", "Multi_Player", "Either"]
+        self.mode_tkvar = tk.StringVar(self)
+        self.mode_tkvar.set(self.mode_options[0])
         
-        status_options = ["Yes", "No"]
-        status_tkvar = tk.StringVar(self)
-        status_tkvar.set(status_options[0])        
+        self.status_options = ["Yes", "No"]
+        self.status_tkvar = tk.StringVar(self)
+        self.status_tkvar.set(self.status_options[0])        
         
-        self.lbl_title = tk.Label(self, text = "Add", font = TITLE_FONT)
+        self.lbl_title = tk.Label(self, text = "Add and Edit", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, columnspan = 4, sticky = "news")
         
         self.lbl_genre = tk.Label(self, text = "Genre:", font = TITLE_FONT)
@@ -195,7 +190,7 @@ class AddMenu(tk.Frame):
         self.lbl_mode = tk.Label(self, text = "Mode:", font = TITLE_FONT)
         self.lbl_mode.grid(row = 4, column = 2, sticky = "news")        
         
-        self.dbx_mode = tk.OptionMenu(self, mode_tkvar, *mode_options)
+        self.dbx_mode = tk.OptionMenu(self, self.mode_tkvar, *self.mode_options)
         self.dbx_mode.grid(row = 4, column = 3, sticky = "news")
         
         self.lbl_price = tk.Label(self, text = "Price:", font = TITLE_FONT)
@@ -207,7 +202,7 @@ class AddMenu(tk.Frame):
         self.lbl_status = tk.Label(self, text = "Status:", font = TITLE_FONT)
         self.lbl_status.grid(row = 5, column = 2, sticky = "news")        
         
-        self.dbx_status = tk.OptionMenu(self, status_tkvar, *status_options)
+        self.dbx_status = tk.OptionMenu(self, self.status_tkvar, *self.status_options)
         self.dbx_status.grid(row = 5, column = 3, sticky = "news")
         
         self.lbl_purchase = tk.Label(self, text = "Purchase Date:", font = TITLE_FONT)
@@ -225,35 +220,60 @@ class AddMenu(tk.Frame):
         self.frm_addbuttons = AddButtons(self)
         self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")        
         
-class EditMenu(tk.Frame):
+class EditSelectionMenu(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
-        edit_options = ["Title 1", "Title 2"]
-        edit_tkvar = tk.StringVar(self)
-        edit_tkvar.set(edit_options[0])       
+        self.edit_options = ["Title 1", "Title 2"]
+        self.edit_tkvar = tk.StringVar(self)
+        self.edit_tkvar.set(self.edit_options[0])       
         
-        self.lbl_title = tk.Label(self, text = "Which title would you like to remove?", font = TITLE_FONT)
+        self.lbl_title = tk.Label(self, text = "Which title would you like to edit?", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
         
-        self.dbx_games = tk.OptionMenu(self, edit_tkvar, *edit_options)
+        self.dbx_games = tk.OptionMenu(self, self.edit_tkvar, *self.edit_options)
         self.dbx_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news")
         
         self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
         self.btn_back.grid(row = 2, column = 0)
     
         self.btn_submit = tk.Button(self, text = "Remove", font = WIDGET_FONT)
-        self.btn_submit.grid(row = 2, column = 1)        
+        self.btn_submit.grid(row = 2, column = 1) 
         
+class RemoveSelectionMenu(tk.Frame):
+    def __init__(self):
+        tk.Frame.__init__(self)
+        self.remove_options = ["Title 1", "Title 2"]
+        self.remove_tkvar = tk.StringVar(self)
+        self.remove_tkvar.set(self.remove_options[0])       
         
+        self.lbl_title = tk.Label(self, text = "Which title would you like to remove?", font = TITLE_FONT)
+        self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
         
-                
+        self.dbx_games = tk.OptionMenu(self, self.remove_tkvar, *self.remove_options)
+        self.dbx_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news")
         
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back.grid(row = 2, column = 0)
+    
+        self.btn_verify = tk.Button(self, text = "Verify", font = WIDGET_FONT)
+        self.btn_verify.grid(row = 2, column = 1) 
         
+class RemoveMenu(tk.Frame):
+    def __init__(self):
+        tk.Frame.__init__(self)       
         
-                
+        self.lbl_title = tk.Label(self, text = "These are the titles marked for removal:", font = TITLE_FONT)
+        self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
         
+        self.scr_games = ScrolledText(self, height = 8, width = 40, font = WIDGET_FONT, wrap = 'word')
+        self.scr_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news") 
         
-        
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back.grid(row = 2, column = 0)
+    
+        self.btn_verify = tk.Button(self, text = "Remove", font = WIDGET_FONT)
+        self.btn_verify.grid(row = 2, column = 1)        
+  
         
 if __name__ == "__main__":
     games = {}
@@ -261,7 +281,7 @@ if __name__ == "__main__":
     games = pk.load(datafile)
     datafile.close()
     root = tk.Tk()
-    #root.title("The Game Library")
+    root.title("The Game Library")
     #root.geometry("500x500")
     
     #main_menu = MainMenu()
@@ -270,11 +290,18 @@ if __name__ == "__main__":
     #search_menu = SearchMenu()
     #search_menu.grid(row = 0, column = 0, stick = "news")
     
-    #add_menu = AddMenu()
-    #add_menu.grid(row = 0, column = 0, stick = "news")
+    #add_edit_menu = AddEditMenu()
+    #add_edit_menu.grid(row = 0, column = 0, stick = "news")
     
-    edit_menu = EditMenu()
-    edit_menu.grid(row = 0, column = 0, stick = "news")    
+    #edit_selection_menu = EditSelectionMenu()
+    #edit_selection_menu.grid(row = 0, column = 0, stick = "news")
+    
+    #remove_selection_menu = RemoveSelectionMenu()
+    #remove_selection_menu.grid(row = 0, column = 0, stick = "news")
+    
+    remove_menu = RemoveMenu()
+    remove_menu.grid(row = 0, column = 0, stick = "news")
+    
     
     #main_menu.tkraise()
     root.mainloop()

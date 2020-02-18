@@ -290,30 +290,30 @@ if __name__ == "__main__":
     root.geometry("900x700")
     
     main_menu = MainMenu()
-    main_menu.grid(row = 0, column = 0, stick = "news")
+    main_menu.grid(row = 0, column = 0, sticky = "news")
     
     search_menu = SearchMenu()
-    search_menu.grid(row = 0, column = 0, stick = "news")
+    search_menu.grid(row = 0, column = 0, sticky = "news")
     
     add_edit_menu = AddEditMenu()
-    add_edit_menu.grid(row = 0, column = 0, stick = "news")
+    add_edit_menu.grid(row = 0, column = 0, sticky = "news")
     
     edit_selection_menu = EditSelectionMenu()
-    edit_selection_menu.grid(row = 0, column = 0, stick = "news")
+    edit_selection_menu.grid(row = 0, column = 0, sticky = "news")
     
     remove_selection_menu = RemoveSelectionMenu()
-    remove_selection_menu.grid(row = 0, column = 0, stick = "news")
+    remove_selection_menu.grid(row = 0, column = 0, sticky = "news")
     
     remove_menu = RemoveMenu()
-    remove_menu.grid(row = 0, column = 0, stick = "news")
+    remove_menu.grid(row = 0, column = 0, sticky = "news")
     
     
-    #main_menu.tkraise()
+    main_menu.tkraise()
     #search_menu.tkraise()
     #add_edit_menu.tkraise()
     #edit_selection_menu.tkraise()
     #remove_selection_menu.tkraise()
-    remove_menu.tkraise()
+    #remove_menu.tkraise()
     
     root.mainloop()
         

@@ -289,31 +289,17 @@ if __name__ == "__main__":
     root.title("The Game Library")
     root.geometry("900x700")
     
-    main_menu = MainMenu()
-    main_menu.grid(row = 0, column = 0, sticky = "news")
+    screens = [MainMenu(), SearchMenu(), AddEditMenu(),
+               EditSelectionMenu(), RemoveSelectionMenu(), RemoveMenu()]
     
-    search_menu = SearchMenu()
-    search_menu.grid(row = 0, column = 0, sticky = "news")
+    screens[0].grid(row = 0, column = 0, sticky = "news")
+    screens[1].grid(row = 0, column = 0, sticky = "news")
+    screens[2].grid(row = 0, column = 0, sticky = "news")
+    screens[3].grid(row = 0, column = 0, sticky = "news")
+    screens[4].grid(row = 0, column = 0, sticky = "news")
+    screens[5].grid(row = 0, column = 0, sticky = "news")
     
-    add_edit_menu = AddEditMenu()
-    add_edit_menu.grid(row = 0, column = 0, sticky = "news")
-    
-    edit_selection_menu = EditSelectionMenu()
-    edit_selection_menu.grid(row = 0, column = 0, sticky = "news")
-    
-    remove_selection_menu = RemoveSelectionMenu()
-    remove_selection_menu.grid(row = 0, column = 0, sticky = "news")
-    
-    remove_menu = RemoveMenu()
-    remove_menu.grid(row = 0, column = 0, sticky = "news")
-    
-    
-    main_menu.tkraise()
-    #search_menu.tkraise()
-    #add_edit_menu.tkraise()
-    #edit_selection_menu.tkraise()
-    #remove_selection_menu.tkraise()
-    #remove_menu.tkraise()
+    screens[0].tkraise()
     root.grid_columnconfigure(0, weight = 1)
     root.mainloop()
         

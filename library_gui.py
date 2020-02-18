@@ -314,6 +314,6 @@ if __name__ == "__main__":
     #edit_selection_menu.tkraise()
     #remove_selection_menu.tkraise()
     #remove_menu.tkraise()
-    
+    root.grid_columnconfigure(0, weight = 1)
     root.mainloop()
         

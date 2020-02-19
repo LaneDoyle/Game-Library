@@ -61,10 +61,12 @@ class MainMenu(Screen):
         print("File Saved.")
     
     def raise_editselection(self):
-        Screen.current = 3
-        Screen.switch_frame()        
-        
-        
+        pop_up = tk.Tk()
+        pop_up.title("Edit Selection")
+        frm_edit_list = EditSelectionMenu(pop_up)
+        frm_edit_list.grid(row = 0, column = 0, sticky = "news")
+               
+
 class SearchMenu(Screen):        
     def __init__(self):
         Screen.__init__(self)
@@ -268,9 +270,9 @@ class AddEditMenu(Screen):
         self.frm_addbuttons = AddButtons(self)
         self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")        
         
-class EditSelectionMenu(Screen):
-    def __init__(self):
-        Screen.__init__(self)
+class EditSelectionMenu(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, master = parent)
         self.edit_options = ["Title 1", "Title 2"]
         self.edit_tkvar = tk.StringVar(self)
         self.edit_tkvar.set(self.edit_options[0])       
@@ -360,12 +362,12 @@ if __name__ == "__main__":
     root.geometry("900x700")
     
     screens = [MainMenu(), SearchMenu(), AddEditMenu(),
-               EditSelectionMenu(), RemoveSelectionMenu(), RemoveMenu()]
+               EditSelectionMenu(None), RemoveSelectionMenu(), RemoveMenu()]
     
     screens[0].grid(row = 0, column = 0, sticky = "news")
     screens[1].grid(row = 0, column = 0, sticky = "news")
     screens[2].grid(row = 0, column = 0, sticky = "news")
-    screens[3].grid(row = 0, column = 0, sticky = "news")
+    #screens[3].grid(row = 0, column = 0, sticky = "news")
     screens[4].grid(row = 0, column = 0, sticky = "news")
     screens[5].grid(row = 0, column = 0, sticky = "news")
     

@@ -15,26 +15,55 @@ class Screen(tk.Frame):
     current = 0 
     def __init__(self):
         tk.Frame.__init__(self)
+    
+    def switch_frame():
+        screens[Screen.current].tkraise()
+        
 class MainMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
         self.lbl_title = tk.Label(self, text = "Game Library", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky = "news")
         
-        self.btn_add = tk.Button(self, text = "Add", font = WIDGET_FONT)
+        self.btn_add = tk.Button(self, text = "Add", font = WIDGET_FONT,
+                                 command = self.raise_addedit)
         self.btn_add.grid(row = 1, column = 0)
         
-        self.btn_edit = tk.Button(self, text = "Edit", font = WIDGET_FONT)
+        self.btn_edit = tk.Button(self, text = "Edit", font = WIDGET_FONT,
+                                  command = self.raise_editselection)
         self.btn_edit.grid(row = 2, column = 0)
         
-        self.btn_search = tk.Button(self, text = "Search", font = WIDGET_FONT)
+        self.btn_search = tk.Button(self, text = "Search", font = WIDGET_FONT,
+                                    command = self.raise_search)
         self.btn_search.grid(row = 3, column = 0)
     
-        self.btn_remove = tk.Button(self, text = "Remove", font = WIDGET_FONT)
+        self.btn_remove = tk.Button(self, text = "Remove", font = WIDGET_FONT,
+                                    command = self.raise_removeselection)
         self.btn_remove.grid(row = 4, column = 0)
         
-        self.btn_save = tk.Button(self, text = "Save", font = WIDGET_FONT)
+        self.btn_save = tk.Button(self, text = "Save", font = WIDGET_FONT,
+                                  command = self.raise_save)
         self.btn_save.grid(row = 5, column = 0)
+        
+    def raise_addedit(self):
+        Screen.current = 2
+        Screen.switch_frame()  
+    
+    def raise_search(self):
+        Screen.current = 1
+        Screen.switch_frame() 
+    
+    def raise_removeselection(self):
+        Screen.current = 4
+        Screen.switch_frame() 
+        
+    def raise_save(self):
+        print("File Saved.")
+    
+    def raise_editselection(self):
+        Screen.current = 3
+        Screen.switch_frame()        
+        
         
 class SearchMenu(Screen):        
     def __init__(self):
@@ -113,27 +142,42 @@ class SearchButtons(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
         
-        self.btn_back = tk.Button(self, text = "Back", font = WIDGET_FONT)
+        self.btn_back = tk.Button(self, text = "Back", font = WIDGET_FONT,
+                                  command = self.raise_main)
         self.btn_back.grid(row = 0, column = 0)
     
-        self.btn_submit = tk.Button(self, text = "Submit", font = WIDGET_FONT)
-        self.btn_submit.grid(row = 0, column = 1)
+        self.btn_submit = tk.Button(self, text = "Submit", font = WIDGET_FONT,
+                                    command = self.raise_main)
+        self.btn_submit.grid(row = 0, column = 2)
         
         self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT)
-        self.btn_clear.grid(row = 0, column = 2)
+        self.btn_clear.grid(row = 0, column = 1)
+    
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame()
+    
         
 class AddButtons(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
         
-        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT,
+                                  command = self.raise_main)
         self.btn_back.grid(row = 0, column = 0)
     
-        self.btn_submit = tk.Button(self, text = "Reset", font = WIDGET_FONT)
+        self.btn_submit = tk.Button(self, text = "Reset", font = WIDGET_FONT,
+                                    command = "")
         self.btn_submit.grid(row = 0, column = 1)
         
-        self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT)
+        self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT,
+                                   command = self.raise_main)
         self.btn_clear.grid(row = 0, column = 2)
+        
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame()    
+        
 
 class AddEditMenu(Screen):
     def __init__(self):
@@ -237,11 +281,21 @@ class EditSelectionMenu(Screen):
         self.dbx_games = tk.OptionMenu(self, self.edit_tkvar, *self.edit_options)
         self.dbx_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news")
         
-        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT, 
+                                  command = self.raise_main)
         self.btn_back.grid(row = 2, column = 0)
     
-        self.btn_submit = tk.Button(self, text = "Remove", font = WIDGET_FONT)
-        self.btn_submit.grid(row = 2, column = 1) 
+        self.btn_submit = tk.Button(self, text = "Edit", font = WIDGET_FONT,
+                                    command = self.raise_addedit)
+        self.btn_submit.grid(row = 2, column = 1)
+    
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame() 
+    
+    def raise_addedit(self):
+        Screen.current = 2
+        Screen.switch_frame()    
         
 class RemoveSelectionMenu(Screen):
     def __init__(self):
@@ -256,12 +310,22 @@ class RemoveSelectionMenu(Screen):
         self.dbx_games = tk.OptionMenu(self, self.remove_tkvar, *self.remove_options)
         self.dbx_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news")
         
-        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT,
+                                  command = self.raise_main)
         self.btn_back.grid(row = 2, column = 0)
     
-        self.btn_verify = tk.Button(self, text = "Verify", font = WIDGET_FONT)
-        self.btn_verify.grid(row = 2, column = 1) 
+        self.btn_verify = tk.Button(self, text = "Verify", font = WIDGET_FONT,
+                                    command = self.raise_remove)
+        self.btn_verify.grid(row = 2, column = 1)
         
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame()
+        
+    def raise_remove(self):
+        Screen.current = 5
+        Screen.switch_frame()        
+              
 class RemoveMenu(Screen):
     def __init__(self):
         Screen.__init__(self)       
@@ -272,11 +336,17 @@ class RemoveMenu(Screen):
         self.scr_games = ScrolledText(self, height = 8, width = 40, font = WIDGET_FONT, wrap = 'word')
         self.scr_games.grid(row = 1, column = 0, columnspan = 2, sticky = "news") 
         
-        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT)
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT,
+                                  command = self.raise_main)
         self.btn_back.grid(row = 2, column = 0)
     
-        self.btn_verify = tk.Button(self, text = "Remove", font = WIDGET_FONT)
-        self.btn_verify.grid(row = 2, column = 1)        
+        self.btn_verify = tk.Button(self, text = "Remove", font = WIDGET_FONT,
+                                    command = self.raise_main)
+        self.btn_verify.grid(row = 2, column = 1)
+    
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame()
  
 
         

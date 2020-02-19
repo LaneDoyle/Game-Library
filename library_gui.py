@@ -371,5 +371,4 @@ if __name__ == "__main__":
     
     screens[0].tkraise()
     root.grid_columnconfigure(0, weight = 1)
-    root.mainloop()
-        
+    root.mainloop()    

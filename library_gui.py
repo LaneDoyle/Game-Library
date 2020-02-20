@@ -54,8 +54,10 @@ class MainMenu(Screen):
         Screen.switch_frame() 
     
     def raise_removeselection(self):
-        Screen.current = 4
-        Screen.switch_frame() 
+        pop_up = tk.Tk()
+        pop_up.title("Remove Selection")
+        frm_edit_select = RemoveSelectionMenu(pop_up)
+        frm_edit_select.grid(row = 0, column = 0) 
         
     def raise_save(self):
         print("File Saved.")
@@ -293,16 +295,18 @@ class EditSelectionMenu(tk.Frame):
         self.btn_submit.grid(row = 2, column = 1)
     
     def raise_main(self):
-        Screen.current = 0
-        Screen.switch_frame() 
+        self.parent.destroy()
+        
     
     def raise_addedit(self):
         Screen.current = 2
-        Screen.switch_frame()    
+        Screen.switch_frame() 
+        self.parent.destroy()
         
-class RemoveSelectionMenu(Screen):
-    def __init__(self):
-        Screen.__init__(self)
+class RemoveSelectionMenu(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, master = parent)
+        self.parent = parent
         self.remove_options = ["Title 1", "Title 2"]
         self.remove_tkvar = tk.StringVar(self)
         self.remove_tkvar.set(self.remove_options[0])       
@@ -324,10 +328,12 @@ class RemoveSelectionMenu(Screen):
     def raise_main(self):
         Screen.current = 0
         Screen.switch_frame()
+        self.parent.destroy()
         
     def raise_remove(self):
-        Screen.current = 5
-        Screen.switch_frame()        
+        Screen.current = 3
+        Screen.switch_frame()
+        self.parent.destroy()
               
 class RemoveMenu(Screen):
     def __init__(self):
@@ -362,11 +368,12 @@ if __name__ == "__main__":
     root.title("The Game Library")
     root.geometry("900x700") 
     
-    screens = [MainMenu(), SearchMenu(), AddEditMenu()]
+    screens = [MainMenu(), SearchMenu(), AddEditMenu(), RemoveMenu()]
     
     screens[0].grid(row = 0, column = 0, sticky = "news")
     screens[1].grid(row = 0, column = 0, sticky = "news")
     screens[2].grid(row = 0, column = 0, sticky = "news")
+    screens[3].grid(row = 0, column = 0, sticky = "news")
     
     screens[0].tkraise()
     root.grid_columnconfigure(0, weight = 1)

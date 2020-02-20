@@ -63,8 +63,8 @@ class MainMenu(Screen):
     def raise_editselection(self):
         pop_up = tk.Tk()
         pop_up.title("Edit Selection")
-        frm_edit_list = EditSelectionMenu(pop_up)
-        frm_edit_list.grid(row = 0, column = 0, sticky = "news")
+        frm_edit_select = EditSelectionMenu(pop_up)
+        frm_edit_select.grid(row = 0, column = 0)
                
 
 class SearchMenu(Screen):        
@@ -273,6 +273,7 @@ class AddEditMenu(Screen):
 class EditSelectionMenu(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
+        self.parent = parent
         self.edit_options = ["Title 1", "Title 2"]
         self.edit_tkvar = tk.StringVar(self)
         self.edit_tkvar.set(self.edit_options[0])       
@@ -359,7 +360,7 @@ if __name__ == "__main__":
     datafile.close()
     root = tk.Tk()
     root.title("The Game Library")
-    root.geometry("900x700")
+    root.geometry("900x700") 
     
     screens = [MainMenu(), SearchMenu(), AddEditMenu()]
     

@@ -361,15 +361,11 @@ if __name__ == "__main__":
     root.title("The Game Library")
     root.geometry("900x700")
     
-    screens = [MainMenu(), SearchMenu(), AddEditMenu(),
-               EditSelectionMenu(None), RemoveSelectionMenu(), RemoveMenu()]
+    screens = [MainMenu(), SearchMenu(), AddEditMenu()]
     
     screens[0].grid(row = 0, column = 0, sticky = "news")
     screens[1].grid(row = 0, column = 0, sticky = "news")
     screens[2].grid(row = 0, column = 0, sticky = "news")
-    #screens[3].grid(row = 0, column = 0, sticky = "news")
-    screens[4].grid(row = 0, column = 0, sticky = "news")
-    screens[5].grid(row = 0, column = 0, sticky = "news")
     
     screens[0].tkraise()
     root.grid_columnconfigure(0, weight = 1)

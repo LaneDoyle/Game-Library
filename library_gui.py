@@ -276,9 +276,11 @@ class EditSelectionMenu(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
         self.parent = parent
-        self.edit_options = ["Title 1", "Title 2"]
+        self.edit_options = ["Select a Title"]
+        for key in games.keys():
+            self.edit_options.append(games[key][1])
         self.edit_tkvar = tk.StringVar(self)
-        self.edit_tkvar.set(self.edit_options[0])       
+        self.edit_tkvar.set(self.edit_options[0])
         
         self.lbl_title = tk.Label(self, text = "Which title would you like to edit?", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
@@ -297,7 +299,6 @@ class EditSelectionMenu(tk.Frame):
     def raise_main(self):
         self.parent.destroy()
         
-    
     def raise_addedit(self):
         Screen.current = 2
         Screen.switch_frame() 

@@ -308,7 +308,9 @@ class RemoveSelectionMenu(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
         self.parent = parent
-        self.remove_options = ["Title 1", "Title 2"]
+        self.remove_options = ["Select a Title"]
+        for key in games.keys():
+            self.remove_options.append(games[key][1])        
         self.remove_tkvar = tk.StringVar(self)
         self.remove_tkvar.set(self.remove_options[0])       
         

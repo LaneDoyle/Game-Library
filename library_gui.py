@@ -454,9 +454,12 @@ class RemoveSelectionMenu(tk.Frame):
         self.parent.destroy()
         
     def raise_remove(self):
-        Screen.current = 3
-        Screen.switch_frame()
-        self.parent.destroy()
+        if self.remove_tkvar.get() == self.remove_options[0]:
+            pass
+        else:        
+            Screen.current = 3
+            Screen.switch_frame()
+            self.parent.destroy()
               
 class RemoveMenu(Screen):
     def __init__(self):

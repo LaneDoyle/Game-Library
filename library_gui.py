@@ -263,12 +263,32 @@ class AddButtons(tk.Frame):
         self.btn_submit.grid(row = 0, column = 1)
         
         self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT,
-                                   command = self.raise_main)
+                                   command = self.confirm)
         self.btn_clear.grid(row = 0, column = 2)
         
     def raise_main(self):
         Screen.current = 0
-        Screen.switch_frame()    
+        Screen.switch_frame()  
+    
+    def confirm(self):
+        entry = []
+        entry.append(screens[3].ent_genre.get())
+        entry.append(screens[3].ent_title.get())
+        entry.append(screens[3].ent_dev.get())
+        entry.append(screens[3].ent_pub.get())
+        entry.append(screens[3].ent_system.get())
+        entry.append(screens[3].ent_release.get())
+        entry.append(screens[3].ent_rating.get())
+        entry.append("") #Placeholder for mode
+        entry.append(screens[3].ent_price.get())
+        entry.append("") #Placeholder for status
+        entry.append(screens[3].ent_purchase.get())
+        entry.append(screens[3].scr_notes.get(0.0, "end"))
+        games[screens[3].edit_key] = entry
+        
+        Screen.current = 0
+        Screen.switch_frame()  
+        screens[3].edit_key
         
 
 class EditMenu(Screen):
@@ -381,6 +401,8 @@ class EditMenu(Screen):
         self.ent_release.insert (0, entry[5])
         self.ent_rating.delete(0, "end")
         self.ent_rating.insert (0, entry[6])
+        self.scr_notes.delete(0.0, "end")
+        self.scr_notes.insert (0.0, entry[11])        
         
         
         
@@ -457,7 +479,7 @@ class RemoveSelectionMenu(tk.Frame):
         if self.remove_tkvar.get() == self.remove_options[0]:
             pass
         else:        
-            Screen.current = 3
+            Screen.current = 4
             Screen.switch_frame()
             self.parent.destroy()
               

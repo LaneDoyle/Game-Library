@@ -71,11 +71,11 @@ class MainMenu(Screen):
 class AddMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
-        self.mode_options = ["Single", "Multi_Player", "Either"]
+        self.mode_options = ["Single Player", "Multi Player", "Either"]
         self.mode_tkvar = tk.StringVar(self)
         self.mode_tkvar.set(self.mode_options[0])
         
-        self.status_options = ["Yes", "No"]
+        self.status_options = ["Finished", "Unfinished"]
         self.status_tkvar = tk.StringVar(self)
         self.status_tkvar.set(self.status_options[0])        
         
@@ -275,11 +275,11 @@ class EditMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
         self.edit_key = 0
-        self.mode_options = ["Single", "Multi_Player", "Either"]
+        self.mode_options = ["Single Player", "Multi Player", "Either"]
         self.mode_tkvar = tk.StringVar(self)
         self.mode_tkvar.set(self.mode_options[0])
         
-        self.status_options = ["Yes", "No"]
+        self.status_options = ["Finished", "Unfinished"]
         self.status_tkvar = tk.StringVar(self)
         self.status_tkvar.set(self.status_options[0])        
         

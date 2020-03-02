@@ -5,6 +5,7 @@
 import pickle as pk
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
+from tkinter import messagebox
 
 '''The Game Library Program'''
 
@@ -42,7 +43,7 @@ class MainMenu(Screen):
         self.btn_remove.grid(row = 4, column = 0)
         
         self.btn_save = tk.Button(self, text = "Save", font = WIDGET_FONT,
-                                  command = self.submit)
+                                  command = self.save)
         self.btn_save.grid(row = 5, column = 0)
         
     def raise_add(self):
@@ -61,8 +62,11 @@ class MainMenu(Screen):
         frm_edit_select = RemoveSelectionMenu(pop_up)
         frm_edit_select.grid(row = 0, column = 0) 
         
-    def submit(self):
-        print("File Saved.")
+    def save(self):
+        messagebox.showinfo(message = "Entry has been added.")
+        datafile = open("game_lib.pickle", "wb")
+        pk.dump(games, datafile)
+        datafile.close()         
     
     def raise_editselection(self):
         pop_up = tk.Tk()

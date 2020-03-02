@@ -5,7 +5,7 @@
 import pickle as pk
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
-from tkinter import messagebox
+from tkinter import messagebox as mb
 
 '''The Game Library Program'''
 
@@ -63,7 +63,7 @@ class MainMenu(Screen):
         frm_edit_select.grid(row = 0, column = 0) 
         
     def save(self):
-        messagebox.showinfo(message = "Entry has been added.")
+        mb.showinfo(message = "File Saved.")
         datafile = open("game_lib.pickle", "wb")
         pk.dump(games, datafile)
         datafile.close()         
@@ -290,6 +290,7 @@ class AddButtons(tk.Frame):
         entry.append(screens[2].ent_purchase.get())
         entry.append(screens[2].scr_notes.get(0.0, "end"))
         games[len(games) + 1] = entry
+        mb.showinfo(message = "Entry has been added.")
         
         Screen.current = 0
         Screen.switch_frame()        

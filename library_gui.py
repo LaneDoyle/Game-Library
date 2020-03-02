@@ -264,12 +264,32 @@ class AddButtons(tk.Frame):
         self.btn_submit.grid(row = 0, column = 1)
         
         self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT,
-                                   command = self.raise_main)
+                                   command = self.confirm)
         self.btn_clear.grid(row = 0, column = 2)
         
     def raise_main(self):
         Screen.current = 0
-        Screen.switch_frame() 
+        Screen.switch_frame()
+    
+    def confirm(self):
+        entry = []
+        entry.append(screens[2].ent_genre.get())
+        entry.append(screens[2].ent_title.get())
+        entry.append(screens[2].ent_dev.get())
+        entry.append(screens[2].ent_pub.get())
+        entry.append(screens[2].ent_system.get())
+        entry.append(screens[2].ent_release.get())
+        entry.append(screens[2].ent_rating.get())
+        entry.append("") #Placeholder for mode
+        entry.append(screens[2].ent_price.get())
+        entry.append("") #Placeholder for status
+        entry.append(screens[2].ent_purchase.get())
+        entry.append(screens[2].scr_notes.get(0.0, "end"))
+        games[len(games) + 1] = entry
+        
+        Screen.current = 0
+        Screen.switch_frame()        
+        
         
     def clear(self):
         screens[2].ent_genre.delete(0, "end")

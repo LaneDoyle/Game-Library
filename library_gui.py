@@ -26,7 +26,7 @@ class MainMenu(Screen):
         self.lbl_title.grid(row = 0, column = 0, sticky = "news")
         
         self.btn_add = tk.Button(self, text = "Add", font = WIDGET_FONT,
-                                 command = self.raise_addedit)
+                                 command = self.raise_add)
         self.btn_add.grid(row = 1, column = 0)
         
         self.btn_edit = tk.Button(self, text = "Edit", font = WIDGET_FONT,
@@ -42,10 +42,10 @@ class MainMenu(Screen):
         self.btn_remove.grid(row = 4, column = 0)
         
         self.btn_save = tk.Button(self, text = "Save", font = WIDGET_FONT,
-                                  command = self.raise_save)
+                                  command = self.submit)
         self.btn_save.grid(row = 5, column = 0)
         
-    def raise_addedit(self):
+    def raise_add(self):
         Screen.current = 2
         Screen.switch_frame()  
     
@@ -59,7 +59,7 @@ class MainMenu(Screen):
         frm_edit_select = RemoveSelectionMenu(pop_up)
         frm_edit_select.grid(row = 0, column = 0) 
         
-    def raise_save(self):
+    def submit(self):
         print("File Saved.")
     
     def raise_editselection(self):
@@ -79,8 +79,8 @@ class AddMenu(Screen):
         self.status_tkvar = tk.StringVar(self)
         self.status_tkvar.set(self.status_options[0])        
         
-        self.lbl_title = tk.Label(self, text = "Add", font = TITLE_FONT)
-        self.lbl_title.grid(row = 0, column = 0, columnspan = 4, sticky = "news")
+        self.lbl_maintitle = tk.Label(self, text = "Add", font = TITLE_FONT)
+        self.lbl_maintitle.grid(row = 0, column = 0, columnspan = 4, sticky = "news")
         
         self.lbl_genre = tk.Label(self, text = "Genre:", font = TITLE_FONT)
         self.lbl_genre.grid(row = 1, column = 0, sticky = "news")        
@@ -155,7 +155,7 @@ class AddMenu(Screen):
         self.scr_notes.grid(row = 7, column = 1, columnspan = 2, sticky = "news")
         
         self.frm_addbuttons = AddButtons(self)
-        self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")
+        self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")         
         
 class SearchMenu(Screen):        
     def __init__(self):
@@ -258,6 +258,45 @@ class AddButtons(tk.Frame):
                                   command = self.raise_main)
         self.btn_back.grid(row = 0, column = 0)
     
+        self.btn_submit = tk.Button(self, text = "Clear", font = WIDGET_FONT,
+                                    command = self.clear)
+        self.btn_submit.grid(row = 0, column = 1)
+        
+        self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT,
+                                   command = self.raise_main)
+        self.btn_clear.grid(row = 0, column = 2)
+        
+    def raise_main(self):
+        Screen.current = 0
+        Screen.switch_frame() 
+        
+    def clear(self):
+        screens[2].ent_genre.delete(0, "end")
+        screens[2].ent_title.delete(0, "end")
+        screens[2].ent_dev.delete(0, "end")
+        screens[2].ent_pub.delete(0, "end")
+        screens[2].ent_system.delete(0, "end")
+        screens[2].ent_purchase.delete(0, "end")
+        screens[2].ent_price.delete(0, "end")
+        screens[2].ent_release.delete(0, "end")
+        screens[2].ent_rating.delete(0, "end")
+        screens[2].scr_notes.delete(0.0, "end")
+        screens[2].mode_tkvar.set(screens[2].mode_options[0])
+        screens[2].status_tkvar.set(screens[2].status_options[0])
+        
+        
+        
+    
+      
+
+class EditButtons(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, master = parent)
+        
+        self.btn_back = tk.Button(self, text = "Cancel", font = WIDGET_FONT,
+                                  command = self.raise_main)
+        self.btn_back.grid(row = 0, column = 0)
+    
         self.btn_submit = tk.Button(self, text = "Reset", font = WIDGET_FONT,
                                     command = "")
         self.btn_submit.grid(row = 0, column = 1)
@@ -289,7 +328,6 @@ class AddButtons(tk.Frame):
         Screen.current = 0
         Screen.switch_frame()  
         screens[3].edit_key
-        
 
 class EditMenu(Screen):
     def __init__(self):
@@ -378,8 +416,8 @@ class EditMenu(Screen):
         self.scr_notes = ScrolledText(self, height = 8, width = 40, font = WIDGET_FONT, wrap = 'word')
         self.scr_notes.grid(row = 7, column = 1, columnspan = 2, sticky = "news")
         
-        self.frm_addbuttons = AddButtons(self)
-        self.frm_addbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")
+        self.frm_editbuttons = EditButtons(self)
+        self.frm_editbuttons.grid(row = 8, column = 1, columnspan = 2, sticky = "ew")
         
     def update(self):
         entry = games[self.edit_key]

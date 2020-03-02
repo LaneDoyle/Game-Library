@@ -298,7 +298,7 @@ class EditButtons(tk.Frame):
         self.btn_back.grid(row = 0, column = 0)
     
         self.btn_submit = tk.Button(self, text = "Reset", font = WIDGET_FONT,
-                                    command = "")
+                                    command = self.reset)
         self.btn_submit.grid(row = 0, column = 1)
         
         self.btn_clear = tk.Button(self, text = "Confirm", font = WIDGET_FONT,
@@ -328,6 +328,10 @@ class EditButtons(tk.Frame):
         Screen.current = 0
         Screen.switch_frame()  
         screens[3].edit_key
+        
+    def reset(self):
+        screens[3].mode_tkvar.set(screens[3].mode_options[0])
+        screens[3].status_tkvar.set(screens[3].status_options[0])        
 
 class EditMenu(Screen):
     def __init__(self):

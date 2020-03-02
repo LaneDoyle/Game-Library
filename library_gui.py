@@ -47,7 +47,9 @@ class MainMenu(Screen):
         
     def raise_add(self):
         Screen.current = 2
-        Screen.switch_frame()  
+        AddButtons.clear(self)
+        Screen.switch_frame() 
+               
     
     def raise_search(self):
         Screen.current = 1
@@ -248,8 +250,7 @@ class SearchButtons(tk.Frame):
     def raise_main(self):
         Screen.current = 0
         Screen.switch_frame()
-    
-        
+         
 class AddButtons(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
@@ -284,11 +285,6 @@ class AddButtons(tk.Frame):
         screens[2].mode_tkvar.set(screens[2].mode_options[0])
         screens[2].status_tkvar.set(screens[2].status_options[0])
         
-        
-        
-    
-      
-
 class EditButtons(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
@@ -445,9 +441,7 @@ class EditMenu(Screen):
         self.ent_rating.insert (0, entry[6])
         self.scr_notes.delete(0.0, "end")
         self.scr_notes.insert (0.0, entry[11])        
-        
-        
-        
+         
 class EditSelectionMenu(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
@@ -546,9 +540,7 @@ class RemoveMenu(Screen):
     def raise_main(self):
         Screen.current = 0
         Screen.switch_frame()
- 
-
-        
+     
 if __name__ == "__main__":
     games = {}
     datafile = open("game_lib.pickle", "rb")

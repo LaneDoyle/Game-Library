@@ -200,40 +200,64 @@ class PrintFilters(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master = parent)
         
+        self.genre_var = tk.BooleanVar(self, True)
+        self.title_var = tk.BooleanVar(self, True)
+        self.dev_var = tk.BooleanVar(self, True)
+        self.pub_var = tk.BooleanVar(self, True)
+        self.sys_var = tk.BooleanVar(self, True)
+        self.purchase_var = tk.BooleanVar(self, True)
+        self.mode_var = tk.BooleanVar(self, True)
+        self.price_var = tk.BooleanVar(self, True)
+        self.release_var = tk.BooleanVar(self, True)
+        self.status_var = tk.BooleanVar(self, True)
+        self.rating_var = tk.BooleanVar(self, True)
+        
+        
         self.lbl_filters = tk.Label(self, text = "Print Filters:", font = TITLE_FONT)
         self.lbl_filters.grid(row = 0, column = 1, columnspan = 2,  sticky = "news")
         
-        self.chk_genre = tk.Checkbutton(self, text='Genre', onvalue = 1, offvalue = 0)
+        self.chk_genre = tk.Checkbutton(self, text='Genre', onvalue = 1, offvalue = 0, 
+                                        variable = self.genre_var)
         self.chk_genre.grid(row = 1, column = 1)
         
-        self.chk_title = tk.Checkbutton(self, text='Title', onvalue = 1, offvalue = 0)
+        self.chk_title = tk.Checkbutton(self, text='Title', onvalue = 1, offvalue = 0,
+                                        variable = self.title_var)
         self.chk_title.grid(row = 2, column = 1)
         
-        self.chk_developer = tk.Checkbutton(self, text='Developer', onvalue = 1, offvalue = 0)
+        self.chk_developer = tk.Checkbutton(self, text='Developer', onvalue = 1, offvalue = 0,
+                                            variable = self.dev_var)
         self.chk_developer.grid(row = 3, column = 1)
         
-        self.chk_publisher = tk.Checkbutton(self, text='Publisher', onvalue = 1, offvalue = 0)
+        self.chk_publisher = tk.Checkbutton(self, text='Publisher', onvalue = 1, offvalue = 0 ,
+                                            variable = self.pub_var)
         self.chk_publisher.grid(row = 4, column = 1)
         
-        self.chk_system = tk.Checkbutton(self, text='System', onvalue = 1, offvalue = 0)
+        self.chk_system = tk.Checkbutton(self, text='System', onvalue = 1, offvalue = 0,
+                                         variable = self.sys_var)
         self.chk_system.grid(row = 1, column = 2)
         
-        self.chk_purchasedate= tk.Checkbutton(self, text='Purchase Date', onvalue = 1, offvalue = 0)
+        self.chk_purchasedate= tk.Checkbutton(self, text='Purchase Date', onvalue = 1, offvalue = 0,
+                                              variable = self.purchase_var)
         self.chk_purchasedate.grid(row = 2, column = 2)
         
-        self.chk_sme = tk.Checkbutton(self, text='Single/Multi/Either', onvalue = 1, offvalue = 0)
+        self.chk_sme = tk.Checkbutton(self, text='Single/Multi/Either', onvalue = 1, offvalue = 0,
+                                      variable = self.mode_var)
         self.chk_sme.grid(row = 3, column = 2)
         
-        self.chk_price = tk.Checkbutton(self, text='Genre', onvalue = 1, offvalue = 0)
+        self.chk_price = tk.Checkbutton(self, text='Price', onvalue = 1, offvalue = 0,
+                                        variable = self.price_var)
         self.chk_price.grid(row = 4, column = 2)
         
-        self.chk_releasedate = tk.Checkbutton(self, text='Release Date', onvalue = 1, offvalue = 0)
+        self.chk_releasedate = tk.Checkbutton(self, text='Release Date', onvalue = 1, offvalue = 0,
+                                              variable = self.release_var)
         self.chk_releasedate.grid(row = 1, column = 3)
         
-        self.chk_status = tk.Checkbutton(self, text='Status', onvalue = 1, offvalue = 0)
+        self.chk_status = tk.Checkbutton(self, text='Status', onvalue = 1, offvalue = 0,
+                                         variable = self.status_var)
         self.chk_status.grid(row = 2, column = 3)
         
-        self.chk_rating = tk.Checkbutton(self, text='Rating', onvalue = 1, offvalue = 0)
+        self.chk_rating = tk.Checkbutton(self, text='Rating', onvalue = 1, offvalue = 0,
+                                         variable = self.rating_var)
         self.chk_rating.grid(row = 3, column = 3)  
         
 class SearchButtons(tk.Frame):

@@ -329,15 +329,36 @@ class SearchButtons(tk.Frame):
         self.btn_back.grid(row = 0, column = 0)
     
         self.btn_submit = tk.Button(self, text = "Search", font = WIDGET_FONT,
-                                    command = "")
+                                    command = self.submit_search)
         self.btn_submit.grid(row = 0, column = 2)
         
-        self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT)
+        self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT,
+                                   command = self.clear)
         self.btn_clear.grid(row = 0, column = 1)
     
     def raise_main(self):
         Screen.current = 0
         Screen.switch_frame()
+    
+    def clear(self):
+        screens[1].frm_printfilters.genre_var.set(False)
+        screens[1].frm_printfilters.title_var.set(False)
+        screens[1].frm_printfilters.dev_var.set(False)
+        screens[1].frm_printfilters.pub_var.set(False)
+        screens[1].frm_printfilters.sys_var.set(False) 
+        screens[1].frm_printfilters.purchase_var.set(False) 
+        screens[1].frm_printfilters.mode_var.set(False) 
+        screens[1].frm_printfilters.price_var.set(False) 
+        screens[1].frm_printfilters.release_var.set(False) 
+        screens[1].frm_printfilters.status_var.set(False) 
+        screens[1].frm_printfilters.rating_var.set(False)
+        screens[1].frm_printfilters.notes_var.set(False)
+        screens[1].scr_results.delete(0.0, "end")
+        
+    def submit_search(self):
+        for key in games.keys():
+            entry = games[key]
+            screens[1].filter_print(entry)
          
 class AddButtons(tk.Frame):
     def __init__(self, parent):

@@ -328,8 +328,8 @@ class SearchButtons(tk.Frame):
                                   command = self.raise_main)
         self.btn_back.grid(row = 0, column = 0)
     
-        self.btn_submit = tk.Button(self, text = "Submit", font = WIDGET_FONT,
-                                    command = self.raise_main)
+        self.btn_submit = tk.Button(self, text = "Search", font = WIDGET_FONT,
+                                    command = "")
         self.btn_submit.grid(row = 0, column = 2)
         
         self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT)

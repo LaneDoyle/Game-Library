@@ -356,6 +356,7 @@ class SearchButtons(tk.Frame):
         screens[1].scr_results.delete(0.0, "end")
         
     def submit_search(self):
+        screens[1].scr_results.delete(0.0, "end")
         for key in games.keys():
             entry = games[key]
             screens[1].filter_print(entry)

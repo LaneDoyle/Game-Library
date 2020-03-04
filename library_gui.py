@@ -194,7 +194,55 @@ class SearchMenu(Screen):
         self.scr_results.grid(row = 5, column = 0, columnspan = 2, sticky = "news")
         
         self.frm_searchbuttons = SearchButtons(self)
-        self.frm_searchbuttons.grid(row = 6, column = 1, sticky = "news")       
+        self.frm_searchbuttons.grid(row = 6, column = 1, sticky = "news")
+    
+    def filter_print(self, entry):
+        if self.frm_printfilters.genre_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.title_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.dev_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.pub_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.sys_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.purchase_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg) 
+            
+        if self.frm_printfilters.mode_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+        
+        if self.frm_printfilters.price_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.release_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.status_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.rating_var.get() == True:
+            msg = entry[0] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        msg = "**********************\n"
+        self.scr_results.insert("insert", msg)
       
 class PrintFilters(tk.Frame):
     def __init__(self, parent):

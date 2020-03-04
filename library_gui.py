@@ -195,6 +195,10 @@ class SearchMenu(Screen):
         
         self.frm_searchbuttons = SearchButtons(self)
         self.frm_searchbuttons.grid(row = 6, column = 1, sticky = "news")
+        
+        for key in games.keys():
+            entry = games[key]
+            self.filter_print(entry)
     
     def filter_print(self, entry):
         if self.frm_printfilters.genre_var.get() == True:
@@ -202,43 +206,47 @@ class SearchMenu(Screen):
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.title_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[1] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.dev_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[2] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.pub_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[3] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.sys_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[4] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.purchase_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[5] + "\n"
             self.scr_results.insert("insert", msg) 
             
         if self.frm_printfilters.mode_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[6] + "\n"
             self.scr_results.insert("insert", msg)
         
         if self.frm_printfilters.price_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[7] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.release_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[8] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.status_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[9] + "\n"
             self.scr_results.insert("insert", msg)
             
         if self.frm_printfilters.rating_var.get() == True:
-            msg = entry[0] + "\n"
+            msg = entry[10] + "\n"
+            self.scr_results.insert("insert", msg)
+            
+        if self.frm_printfilters.notes_var.get() == True:
+            msg = entry[11] + "\n"
             self.scr_results.insert("insert", msg)
             
         msg = "**********************\n"
@@ -259,6 +267,7 @@ class PrintFilters(tk.Frame):
         self.release_var = tk.BooleanVar(self, True)
         self.status_var = tk.BooleanVar(self, True)
         self.rating_var = tk.BooleanVar(self, True)
+        self.notes_var = tk.BooleanVar(self, True)
         
         
         self.lbl_filters = tk.Label(self, text = "Print Filters:", font = TITLE_FONT)
@@ -306,7 +315,10 @@ class PrintFilters(tk.Frame):
         
         self.chk_rating = tk.Checkbutton(self, text='Rating', onvalue = 1, offvalue = 0,
                                          variable = self.rating_var)
-        self.chk_rating.grid(row = 3, column = 3)  
+        self.chk_rating.grid(row = 3, column = 3)
+        self.chk_notes = tk.Checkbutton(self, text='Notes', onvalue = 1, offvalue = 0,
+                                         variable = self.notes_var)
+        self.chk_notes.grid(row = 4, column = 3)        
         
 class SearchButtons(tk.Frame):
     def __init__(self, parent):

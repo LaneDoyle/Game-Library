@@ -602,7 +602,11 @@ class EditSelectionMenu(tk.Frame):
         
     def raise_edit(self):
         if self.edit_tkvar.get() == self.edit_options[0]:
-            pass
+            popup = tk.Tk()
+            popup.title("ERROR")
+            msg = "ERROR: Please select a title"
+            frm_error = GenericMessage(popup, msg)
+            frm_error.grid(row = 0, column = 0)
         else:
             for i in range(len(self.edit_options)):
                 if self.edit_tkvar.get() == self.edit_options[i]:
@@ -671,6 +675,18 @@ class RemoveMenu(Screen):
     def raise_main(self):
         Screen.current = 0
         Screen.switch_frame()
+
+class GenericMessage(tk.Frame):
+    def __init__(self, parent, msg =  "generic"):
+        tk.Frame.__init__(self, master = parent)
+        self.parent = parent
+        
+        self.lbl_continue = tk.Label(self, text = msg)
+        self.lbl_continue.grid(row = 0, column = 0)
+        
+        self.btn_ok = tk.Button(self, text = "Ok", 
+                                command = self.parent.destroy)
+        self.btn_ok.grid(row = 1, column = 0)
      
 if __name__ == "__main__":
     games = {}

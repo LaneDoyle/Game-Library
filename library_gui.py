@@ -188,7 +188,7 @@ class SearchMenu(Screen):
         self.ent_searchfor.grid(row = 4, column = 0, sticky = "news")
 
         self.frm_printfilters = PrintFilters(self)
-        self.frm_printfilters.grid(row = 4, column = 1, sticky = "news")
+        self.frm_printfilters.grid(row = 1, column = 1, rowspan = 4, sticky = "news")
         
         self.scr_results = ScrolledText(self, height = 8, width = 40, font = WIDGET_FONT, wrap = 'word')
         self.scr_results.grid(row = 5, column = 0, columnspan = 2, sticky = "news")
@@ -252,14 +252,8 @@ class SearchMenu(Screen):
         msg = "**********************\n"
         self.scr_results.insert("insert", msg)
         
-    def print_search(self):
-        self.scr_results.delete(0.0, "end")
-        keyword = self.ent_searchfor.get()
-        
-        for key in games.keys():
-            if self.search_tkvar == self.search_options[0]:
-                entry = games[key]
-                self.filter_print(entry)
+    
+                
             
       
 class PrintFilters(tk.Frame):
@@ -339,7 +333,7 @@ class SearchButtons(tk.Frame):
         self.btn_back.grid(row = 0, column = 0)
     
         self.btn_submit = tk.Button(self, text = "Search", font = WIDGET_FONT,
-                                    command = self.submit_search)
+                                    command = self.print_search)
         self.btn_submit.grid(row = 0, column = 2)
         
         self.btn_clear = tk.Button(self, text = "Clear", font = WIDGET_FONT,
@@ -370,6 +364,59 @@ class SearchButtons(tk.Frame):
         for key in games.keys():
             entry = games[key]
             screens[1].filter_print(entry)
+            
+    def print_search(self):
+        screens[1].scr_results.delete(0.0, "end")
+        
+        for key in games.keys():
+            screens[1].entry = games[key]
+            keyword = screens[1].ent_searchfor.get()
+            if screens[1].search_tkvar.get() == screens[1].search_options[0]:
+                screens[1].filter_print(screens[1].entry)
+                
+            if screens[1].search_tkvar.get() == screens[1].search_options[1]:
+                if keyword in screens[1].entry[0]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[2]:
+                if keyword in screens[1].entry[1]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[3]:
+                if keyword in screens[1].entry[2]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[4]:
+                if keyword in screens[1].entry[3]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[5]:
+                if keyword in screens[1].entry[4]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[6]:
+                if keyword in screens[1].entry[5]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[7]:
+                if keyword in screens[1].entry[6]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[8]:
+                if keyword in screens[1].entry[7]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[9]:
+                if keyword in screens[1].entry[8]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[10]:
+                if keyword in screens[1].entry[9]:
+                    screens[1].filter_print(screens[1].entry)
+                    
+            if screens[1].search_tkvar.get() == screens[1].search_options[11]:
+                if keyword in screens[1].entry[10]:
+                    screens[1].filter_print(screens[1].entry)    
          
 class AddButtons(tk.Frame):
     def __init__(self, parent):
@@ -467,8 +514,7 @@ class EditButtons(tk.Frame):
         screens[3].edit_key
         
     def reset(self):
-        screens[3].mode_tkvar.set(screens[3].mode_options[0])
-        screens[3].status_tkvar.set(screens[3].status_options[0])        
+        self.master.update()       
 
 class EditMenu(Screen):
     def __init__(self):
@@ -583,22 +629,23 @@ class EditMenu(Screen):
         self.scr_notes.delete(0.0, "end")
         self.scr_notes.insert (0.0, entry[11])
             
-        if entry[7] == "Single Player":
+        if entry[7].lower() == "single player":
             self.mode_tkvar.set(self.mode_options[1])
-        elif entry[7] == "Multi Player":
+        elif entry[7].lower() == "multi player":
             self.mode_tkvar.set(self.mode_options[2])
-        elif entry[7] == "Either":
+        elif entry[7].lower() == "either":
             self.mode_tkvar.set(self.mode_options[3])
         else:
             self.mode_tkvar.set(self.mode_options[0])
             
-        '''for i in range(len(self.mode_options)):
-            if entry[7] == self.mode_options[i]:
-                self.mode_tkvar.set(self.mode_options[i])'''
-                
-        '''for i in range(len(self.status_options)):
-            if entry[9] == self.status_options[i]:
-                self.status_tkvar.set(self.status_options[i])'''
+        if entry[9].lower() == "finished":
+            self.status_tkvar.set(self.status_options[1])
+        elif entry[9].lower() == "unfinished":
+            self.status_tkvar.set(self.status_options[2])
+        else:
+            self.status_tkvar.set(self.status_options[0])
+            
+        
                 
         
          

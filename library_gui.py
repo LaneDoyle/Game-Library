@@ -453,7 +453,11 @@ class AddButtons(tk.Frame):
         entry.append(screens[2].ent_purchase.get())
         entry.append(screens[2].scr_notes.get(0.0, "end"))
         games[len(games) + 1] = entry
-        mb.showinfo(message = "Entry has been added.")
+        popup = tk.Tk()
+        popup.title("Success")
+        msg = "Title has been added."
+        frm_error = GenericMessage(popup, msg)
+        frm_error.grid(row = 0, column = 0)
         
         Screen.current = 0
         Screen.switch_frame()        
@@ -699,7 +703,7 @@ class RemoveSelectionMenu(tk.Frame):
         self.parent = parent
         self.remove_options = ["Select a Title"]
         for key in games.keys():
-            self.remove_options.append(games[key][1])        
+            self.remove_options.append(games[key][1])
         self.remove_tkvar = tk.StringVar(self)
         self.remove_tkvar.set(self.remove_options[0])       
         
@@ -724,7 +728,11 @@ class RemoveSelectionMenu(tk.Frame):
         
     def raise_remove(self):
         if self.remove_tkvar.get() == self.remove_options[0]:
-            pass
+            popup = tk.Tk()
+            popup.title("ERROR")
+            msg = "ERROR: Please select a title"
+            frm_error = GenericMessage(popup, msg)
+            frm_error.grid(row = 0, column = 0)
         else:        
             Screen.current = 4
             Screen.switch_frame()

@@ -77,11 +77,11 @@ class MainMenu(Screen):
 class AddMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
-        self.mode_options = ["Single Player", "Multi Player", "Either"]
+        self.mode_options = ["", "Single Player", "Multi Player", "Either"]
         self.mode_tkvar = tk.StringVar(self)
         self.mode_tkvar.set(self.mode_options[0])
         
-        self.status_options = ["Finished", "Unfinished"]
+        self.status_options = ["", "Finished", "Unfinished"]
         self.status_tkvar = tk.StringVar(self)
         self.status_tkvar.set(self.status_options[0])        
         
@@ -166,7 +166,7 @@ class AddMenu(Screen):
 class SearchMenu(Screen):        
     def __init__(self):
         Screen.__init__(self)
-        self.search_options = ["Genre", "Title", "Developer", "Publisher", "System", 
+        self.search_options = ["All", "Genre", "Title", "Developer", "Publisher", "System", 
                    "Release Date", "Rating", "Mode", "Price", "Status",
                    "Purchase Date"]
         self.search_tkvar = tk.StringVar(self)
@@ -251,6 +251,16 @@ class SearchMenu(Screen):
             
         msg = "**********************\n"
         self.scr_results.insert("insert", msg)
+        
+    def print_search(self):
+        self.scr_results.delete(0.0, "end")
+        keyword = self.ent_searchfor.get()
+        
+        for key in games.keys():
+            if self.search_tkvar == self.search_options[0]:
+                entry = games[key]
+                self.filter_print(entry)
+            
       
 class PrintFilters(tk.Frame):
     def __init__(self, parent):
@@ -390,9 +400,9 @@ class AddButtons(tk.Frame):
         entry.append(screens[2].ent_system.get())
         entry.append(screens[2].ent_release.get())
         entry.append(screens[2].ent_rating.get())
-        entry.append("") #Placeholder for mode
+        entry.append(screens[2].mode_tkvar.get())
         entry.append(screens[2].ent_price.get())
-        entry.append("") #Placeholder for status
+        entry.append(screens[2].status_tkvar.get())
         entry.append(screens[2].ent_purchase.get())
         entry.append(screens[2].scr_notes.get(0.0, "end"))
         games[len(games) + 1] = entry
@@ -445,9 +455,9 @@ class EditButtons(tk.Frame):
         entry.append(screens[3].ent_system.get())
         entry.append(screens[3].ent_release.get())
         entry.append(screens[3].ent_rating.get())
-        entry.append("") #Placeholder for mode
+        entry.append(screens[3].mode_tkvar.get())
         entry.append(screens[3].ent_price.get())
-        entry.append("") #Placeholder for status
+        entry.append(screens[3].status_tkvar.get())
         entry.append(screens[3].ent_purchase.get())
         entry.append(screens[3].scr_notes.get(0.0, "end"))
         games[screens[3].edit_key] = entry
@@ -464,11 +474,11 @@ class EditMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
         self.edit_key = 0
-        self.mode_options = ["Single Player", "Multi Player", "Either"]
+        self.mode_options = ["", "Single Player", "Multi Player", "Either"]
         self.mode_tkvar = tk.StringVar(self)
         self.mode_tkvar.set(self.mode_options[0])
         
-        self.status_options = ["Finished", "Unfinished"]
+        self.status_options = ["", "Finished", "Unfinished"]
         self.status_tkvar = tk.StringVar(self)
         self.status_tkvar.set(self.status_options[0])        
         
@@ -571,7 +581,26 @@ class EditMenu(Screen):
         self.ent_rating.delete(0, "end")
         self.ent_rating.insert (0, entry[6])
         self.scr_notes.delete(0.0, "end")
-        self.scr_notes.insert (0.0, entry[11])        
+        self.scr_notes.insert (0.0, entry[11])
+            
+        if entry[7] == "Single Player":
+            self.mode_tkvar.set(self.mode_options[1])
+        elif entry[7] == "Multi Player":
+            self.mode_tkvar.set(self.mode_options[2])
+        elif entry[7] == "Either":
+            self.mode_tkvar.set(self.mode_options[3])
+        else:
+            self.mode_tkvar.set(self.mode_options[0])
+            
+        '''for i in range(len(self.mode_options)):
+            if entry[7] == self.mode_options[i]:
+                self.mode_tkvar.set(self.mode_options[i])'''
+                
+        '''for i in range(len(self.status_options)):
+            if entry[9] == self.status_options[i]:
+                self.status_tkvar.set(self.status_options[i])'''
+                
+        
          
 class EditSelectionMenu(tk.Frame):
     def __init__(self, parent):

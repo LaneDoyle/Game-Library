@@ -63,7 +63,11 @@ class MainMenu(Screen):
         frm_edit_select.grid(row = 0, column = 0) 
         
     def save(self):
-        mb.showinfo(message = "File Saved.")
+        popup = tk.Tk()
+        popup.title("Saved")
+        msg = "File has been saved."
+        frm_error = GenericMessage(popup, msg)
+        frm_error.grid(row = 0, column = 0)
         datafile = open("game_lib.pickle", "wb")
         pk.dump(games, datafile)
         datafile.close()         

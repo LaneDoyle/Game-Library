@@ -737,15 +737,25 @@ class RemoveSelectionMenu(tk.Frame):
             msg = "ERROR: Please select a title"
             frm_error = GenericMessage(popup, msg)
             frm_error.grid(row = 0, column = 0)
-        else:        
+        else:
+            for i in range(len(self.remove_options)):
+                if self.remove_tkvar.get() == self.remove_options[i]:
+                    self.remove_key = i
+                    screens[4].remove_key = i
+                    entry = games[self.remove_key]
+                    screens[4].scr_games.delete(0.0, "end")
+                    screens[4].scr_games.insert(0.0, entry[1])                     
+                    break            
             Screen.current = 4
             Screen.switch_frame()
             self.parent.destroy()
+        
+            
               
 class RemoveMenu(Screen):
     def __init__(self):
-        Screen.__init__(self)       
-        
+        Screen.__init__(self)
+        self.remove_key = 0
         self.lbl_title = tk.Label(self, text = "These are the titles marked for removal:", font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, columnspan = 2, sticky = "news")
         
@@ -757,12 +767,25 @@ class RemoveMenu(Screen):
         self.btn_back.grid(row = 2, column = 0)
     
         self.btn_verify = tk.Button(self, text = "Remove", font = WIDGET_FONT,
-                                    command = self.raise_main)
+                                    command = self.remove)
         self.btn_verify.grid(row = 2, column = 1)
+    
+    def remove(self):
+        temp_remove_key = self.remove_key
+        for key in range(1, len(games)+1):
+            if key >= temp_remove_key and key != len(games):
+                games[key] = games[key + 1]
+        games.pop(len(games))
+
+                           
+        Screen.current = 0
+        Screen.switch_frame()
     
     def raise_main(self):
         Screen.current = 0
-        Screen.switch_frame()
+        Screen.switch_frame()        
+        
+        
 
 class GenericMessage(tk.Frame):
     def __init__(self, parent, msg =  "generic"):
